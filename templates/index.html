@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recomendador de Equipos Pokémon</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Recomendador de Equipos Pokémon</h1>
+      <p class="subtitle">
+        Selecciona el equipo rival y te recomendaré equipos optimizados
+      </p>
+
+      <div class="input-section">
+        <div class="controls-row">
+          <div class="control-group">
+            <label for="rivalTeamSize">Tamaño del equipo rival:</label>
+            <input type="number" id="rivalTeamSize" min="1" max="6" value="4" />
+          </div>
+          <div class="control-group">
+            <label for="recommendedTeamSize"
+              >Pokémon por equipo recomendado:</label
+            >
+            <input
+              type="number"
+              id="recommendedTeamSize"
+              min="1"
+              max="6"
+              value="6"
+            />
+          </div>
+          <div class="control-group">
+            <label for="numRecommendations"
+              >Número de equipos recomendados:</label
+            >
+            <input
+              type="number"
+              id="numRecommendations"
+              min="1"
+              max="10"
+              value="5"
+            />
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Equipo rival:</label>
+          <div id="rivalSelectors"></div>
+        </div>
+
+        <button id="generateBtn" type="button">
+          Generar Equipos Recomendados
+        </button>
+      </div>
+
+      <div id="loading" class="loading" style="display: none">
+        Generando equipos recomendados...
+      </div>
+
+      <div id="error" class="error" style="display: none"></div>
+
+      <div id="rivalTeamDisplay" class="rival-team"></div>
+      <div id="teamsSection" class="teams-section"></div>
+    </div>
+
+    <script>
+      let allPokemon = [];
+      let selectedSprites = {};
+
+      async function loadPokemonList() {
+        try {
+          const response = await fetch("/get_pokemon_list");
+          const data = await response.json();
+          if (data.error) {
+            throw new Error(data.error);
+          }
+          allPokemon = data.pokemon;
+          updateRivalSelectors();
+        } catch (err) {
+          document.getElementById("error").textContent =
+            "Error al cargar lista de Pokémon: " + err.message;
+          document.getElementById("error").style.display = "block";
+        }
+      }
+
+      function createPokemonSelector(index) {
+        const wrapper = document.createElement("div");
+        wrapper.className = "selector-wrapper";
+        wrapper.innerHTML = `
+                <div class="selector-container">
+                    <img class="selected-sprite" id="sprite-${index}" style="display: none;" alt="">
+                    <input type="text" class="pokemon-search" placeholder="Buscar Pokémon ${
+                      index + 1
+                    }..." data-index="${index}">
+                    <div class="pokemon-dropdown" data-index="${index}"></div>
+                    <input type="hidden" class="selected-pokemon" data-index="${index}">
+                </div>
+            `;
+        return wrapper;
+      }
+
+      function updateRivalSelectors() {
+        const container = document.getElementById("rivalSelectors");
+        const size = parseInt(document.getElementById("rivalTeamSize").value);
+        container.innerHTML = "";
+        selectedSprites = {};
+
+        for (let i = 0; i < size; i++) {
+          container.appendChild(createPokemonSelector(i));
+        }
+
+        attachSearchListeners();
+      }
+
+      function attachSearchListeners() {
+        const searches = document.querySelectorAll(".pokemon-search");
+
+        searches.forEach((search) => {
+          search.addEventListener("focus", function () {
+            const index = this.dataset.index;
+            showDropdown(index, "");
+          });
+
+          search.addEventListener("input", function () {
+            const index = this.dataset.index;
+            showDropdown(index, this.value);
+          });
+
+          search.addEventListener("blur", function () {
+            setTimeout(() => {
+              const index = this.dataset.index;
+              hideDropdown(index);
+            }, 200);
+          });
+        });
+      }
+
+      function showDropdown(index, filter) {
+        const dropdown = document.querySelector(
+          `.pokemon-dropdown[data-index="${index}"]`
+        );
+        const filtered = allPokemon
+          .filter((p) => p.nombre.toLowerCase().includes(filter.toLowerCase()))
+          .slice(0, 50);
+
+        dropdown.innerHTML = filtered
+          .map(
+            (p) => `
+                <div class="dropdown-item" onclick="selectPokemon(${index}, '${
+              p.nombre
+            }', '${p.sprite_url}')">
+                    <img src="${
+                      p.sprite_url
+                    }" onerror="this.style.display='none'" alt="${p.nombre}">
+                    <div class="item-info">
+                        <span class="item-name">${p.nombre}</span>
+                        <div class="item-types">
+                            <span class="type-badge type-${p.tipo1}">${
+              p.tipo1
+            }</span>
+                            ${
+                              p.tipo2
+                                ? `<span class="type-badge type-${p.tipo2}">${p.tipo2}</span>`
+                                : ""
+                            }
+                        </div>
+                    </div>
+                    <span class="item-stats">${p.totalstats}</span>
+                </div>
+            `
+          )
+          .join("");
+
+        dropdown.style.display = "block";
+      }
+
+      function hideDropdown(index) {
+        const dropdown = document.querySelector(
+          `.pokemon-dropdown[data-index="${index}"]`
+        );
+        dropdown.style.display = "none";
+      }
+
+      function selectPokemon(index, name, spriteUrl) {
+        const search = document.querySelector(
+          `.pokemon-search[data-index="${index}"]`
+        );
+        const hidden = document.querySelector(
+          `.selected-pokemon[data-index="${index}"]`
+        );
+        const sprite = document.getElementById(`sprite-${index}`);
+
+        search.value = name;
+        hidden.value = name;
+        sprite.src = spriteUrl;
+        sprite.style.display = "block";
+        selectedSprites[index] = spriteUrl;
+
+        hideDropdown(index);
+      }
+
+      document
+        .getElementById("rivalTeamSize")
+        .addEventListener("change", updateRivalSelectors);
+
+      document
+        .getElementById("generateBtn")
+        .addEventListener("click", async () => {
+          const selectedPokemon = [];
+          const hiddenInputs = document.querySelectorAll(".selected-pokemon");
+
+          hiddenInputs.forEach((input) => {
+            if (input.value) {
+              selectedPokemon.push(input.value);
+            }
+          });
+
+          if (selectedPokemon.length === 0) {
+            document.getElementById("error").textContent =
+              "Debes seleccionar al menos un Pokémon";
+            document.getElementById("error").style.display = "block";
+            return;
+          }
+
+          const loading = document.getElementById("loading");
+          const error = document.getElementById("error");
+
+          loading.style.display = "block";
+          error.style.display = "none";
+
+          try {
+            const response = await fetch("/recommend", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                rival_team: selectedPokemon,
+                num_recommendations: parseInt(
+                  document.getElementById("numRecommendations").value
+                ),
+                team_size: parseInt(
+                  document.getElementById("recommendedTeamSize").value
+                ),
+              }),
+            });
+
+            const data = await response.json();
+            loading.style.display = "none";
+
+            if (data.error) {
+              error.textContent = data.error;
+              error.style.display = "block";
+              return;
+            }
+
+            displayRivalTeam(data.rival_team);
+            displayTeams(data.teams);
+          } catch (err) {
+            loading.style.display = "none";
+            error.textContent =
+              "Error al procesar la solicitud: " + err.message;
+            error.style.display = "block";
+          }
+        });
+
+      function displayRivalTeam(rivalTeam) {
+        const display = document.getElementById("rivalTeamDisplay");
+        display.style.display = "block";
+        display.innerHTML = `
+                <h2>Equipo Rival (${rivalTeam.length} Pokémon)</h2>
+                <div class="pokemon-grid rival-grid">
+                    ${rivalTeam
+                      .map(
+                        (p) => `
+                        <div class="pokemon-card rival-card">
+                            <img src="${
+                              p.sprite_url
+                            }" class="pokemon-sprite" onerror="this.outerHTML='<div class=\\'sprite-placeholder\\'>?</div>'" alt="${
+                          p.name
+                        }">
+                            <div class="pokemon-name">${p.name}</div>
+                            <div class="pokemon-types">
+                                ${p.types
+                                  .map(
+                                    (t) =>
+                                      `<span class="type-badge type-${t}">${t}</span>`
+                                  )
+                                  .join("")}
+                            </div>
+                            <div class="pokemon-total">Stats: ${
+                              p.totalstats
+                            }</div>
+                        </div>
+                    `
+                      )
+                      .join("")}
+                </div>
+            `;
+      }
+
+      function displayTeams(teams) {
+        const section = document.getElementById("teamsSection");
+        section.style.display = "block";
+        section.innerHTML = teams
+          .map(
+            (team, idx) => `
+                <div class="team-card">
+                    <div class="team-header">
+                        <div class="team-title">Equipo Recomendado ${
+                          idx + 1
+                        }</div>
+                        <div class="team-stats">
+                            <span class="stat-badge">Stats Promedio: ${Math.round(
+                              team.avg_stats
+                            )}</span>
+                            <span class="stat-badge">Score: ${team.avg_score.toFixed(
+                              2
+                            )}</span>
+                        </div>
+                    </div>
+                    <div class="pokemon-grid">
+                        ${team.pokemon
+                          .map(
+                            (p) => `
+                            <div class="pokemon-card">
+                                <img src="${
+                                  p.sprite_url
+                                }" class="pokemon-sprite" onerror="this.outerHTML='<div class=\\'sprite-placeholder\\'>?</div>'" alt="${
+                              p.nombre
+                            }">
+                                <div class="pokemon-name">${p.nombre}</div>
+                                <div class="pokemon-types">
+                                    <span class="type-badge type-${p.tipo1}">${
+                              p.tipo1
+                            }</span>
+                                    ${
+                                      p.tipo2
+                                        ? `<span class="type-badge type-${p.tipo2}">${p.tipo2}</span>`
+                                        : ""
+                                    }
+                                </div>
+                                <div class="pokemon-total">Stats: ${
+                                  p.totalstats
+                                }</div>
+                                <div class="pokemon-score">Score: ${p.score.toFixed(
+                                  2
+                                )}</div>
+                            </div>
+                        `
+                          )
+                          .join("")}
+                    </div>
+                </div>
+            `
+          )
+          .join("");
+      }
+
+      loadPokemonList();
+    </script>
+  </body>
+</html>
