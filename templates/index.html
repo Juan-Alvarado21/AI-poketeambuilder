@@ -69,6 +69,55 @@
       let allPokemon = [];
       let selectedSprites = {};
 
+      // Funciones helper para manejar sprites con múltiples fallbacks
+      function getSpriteUrl(spriteData) {
+        if (typeof spriteData === "string") {
+          return spriteData;
+        }
+        return spriteData.primary || spriteData;
+      }
+
+      function getFallbackUrl(spriteData) {
+        if (typeof spriteData === "string") {
+          return "";
+        }
+        return spriteData.fallback || "";
+      }
+
+      function getFallback2Url(spriteData) {
+        if (typeof spriteData === "string") {
+          return "";
+        }
+        return spriteData.fallback2 || "";
+      }
+
+      function handleImageError(img, fallbackUrl, fallback2Url) {
+        if (!img.dataset.fallbackAttempt) {
+          // Primer intento: usar fallback
+          img.dataset.fallbackAttempt = "1";
+          if (fallbackUrl) {
+            img.src = fallbackUrl;
+            return;
+          }
+        }
+
+        if (img.dataset.fallbackAttempt === "1") {
+          // Segundo intento: usar fallback2
+          img.dataset.fallbackAttempt = "2";
+          if (fallback2Url) {
+            img.src = fallback2Url;
+            return;
+          }
+        }
+
+        // Todos los fallbacks fallaron: mostrar placeholder
+        img.style.display = "none";
+        const placeholder = document.createElement("div");
+        placeholder.className = "sprite-placeholder";
+        placeholder.textContent = "?";
+        img.parentNode.replaceChild(placeholder, img);
+      }
+
       async function loadPokemonList() {
         try {
           const response = await fetch("/get_pokemon_list");
@@ -146,14 +195,26 @@
           .slice(0, 50);
 
         dropdown.innerHTML = filtered
-          .map(
-            (p) => `
-                <div class="dropdown-item" onclick="selectPokemon(${index}, '${
-              p.nombre
-            }', '${p.sprite_url}')">
-                    <img src="${
-                      p.sprite_url
-                    }" onerror="this.style.display='none'" alt="${p.nombre}">
+          .map((p) => {
+            const spriteJson = JSON.stringify(p.sprite_url).replace(
+              /"/g,
+              "&quot;"
+            );
+            const primaryUrl = getSpriteUrl(p.sprite_url);
+            const fallbackUrl = getFallbackUrl(p.sprite_url);
+            const fallback2Url = getFallback2Url(p.sprite_url);
+            const imgId = `dropdown-img-${index}-${Math.random()
+              .toString(36)
+              .substr(2, 9)}`;
+
+            return `
+                <div class="dropdown-item" onclick='selectPokemon(${index}, "${p.nombre.replace(
+              /'/g,
+              "&#39;"
+            )}", ${spriteJson})'>
+                    <img id="${imgId}" src="${primaryUrl}" 
+                         onerror="handleImageError(document.getElementById('${imgId}'), '${fallbackUrl}', '${fallback2Url}')" 
+                         alt="${p.nombre}">
                     <div class="item-info">
                         <span class="item-name">${p.nombre}</span>
                         <div class="item-types">
@@ -169,8 +230,8 @@
                     </div>
                     <span class="item-stats">${p.totalstats}</span>
                 </div>
-            `
-          )
+              `;
+          })
           .join("");
 
         dropdown.style.display = "block";
@@ -183,7 +244,7 @@
         dropdown.style.display = "none";
       }
 
-      function selectPokemon(index, name, spriteUrl) {
+      function selectPokemon(index, name, spriteData) {
         const search = document.querySelector(
           `.pokemon-search[data-index="${index}"]`
         );
@@ -194,9 +255,17 @@
 
         search.value = name;
         hidden.value = name;
-        sprite.src = spriteUrl;
+
+        const primaryUrl = getSpriteUrl(spriteData);
+        const fallbackUrl = getFallbackUrl(spriteData);
+        const fallback2Url = getFallback2Url(spriteData);
+
+        sprite.src = primaryUrl;
+        sprite.onerror = function () {
+          handleImageError(this, fallbackUrl, fallback2Url);
+        };
         sprite.style.display = "block";
-        selectedSprites[index] = spriteUrl;
+        selectedSprites[index] = spriteData;
 
         hideDropdown(index);
       }
@@ -273,14 +342,18 @@
                 <h2>Equipo Rival (${rivalTeam.length} Pokémon)</h2>
                 <div class="pokemon-grid rival-grid">
                     ${rivalTeam
-                      .map(
-                        (p) => `
+                      .map((p, idx) => {
+                        const primaryUrl = getSpriteUrl(p.sprite_url);
+                        const fallbackUrl = getFallbackUrl(p.sprite_url);
+                        const fallback2Url = getFallback2Url(p.sprite_url);
+                        const imgId = `rival-img-${idx}`;
+
+                        return `
                         <div class="pokemon-card rival-card">
-                            <img src="${
-                              p.sprite_url
-                            }" class="pokemon-sprite" onerror="this.outerHTML='<div class=\\'sprite-placeholder\\'>?</div>'" alt="${
-                          p.name
-                        }">
+                            <img id="${imgId}" src="${primaryUrl}" 
+                                 class="pokemon-sprite" 
+                                 onerror="handleImageError(document.getElementById('${imgId}'), '${fallbackUrl}', '${fallback2Url}')" 
+                                 alt="${p.name}">
                             <div class="pokemon-name">${p.name}</div>
                             <div class="pokemon-types">
                                 ${p.types
@@ -294,8 +367,8 @@
                               p.totalstats
                             }</div>
                         </div>
-                    `
-                      )
+                          `;
+                      })
                       .join("")}
                 </div>
             `;
@@ -323,14 +396,18 @@
                     </div>
                     <div class="pokemon-grid">
                         ${team.pokemon
-                          .map(
-                            (p) => `
+                          .map((p, pIdx) => {
+                            const primaryUrl = getSpriteUrl(p.sprite_url);
+                            const fallbackUrl = getFallbackUrl(p.sprite_url);
+                            const fallback2Url = getFallback2Url(p.sprite_url);
+                            const imgId = `team-${idx}-img-${pIdx}`;
+
+                            return `
                             <div class="pokemon-card">
-                                <img src="${
-                                  p.sprite_url
-                                }" class="pokemon-sprite" onerror="this.outerHTML='<div class=\\'sprite-placeholder\\'>?</div>'" alt="${
-                              p.nombre
-                            }">
+                                <img id="${imgId}" src="${primaryUrl}" 
+                                     class="pokemon-sprite" 
+                                     onerror="handleImageError(document.getElementById('${imgId}'), '${fallbackUrl}', '${fallback2Url}')" 
+                                     alt="${p.nombre}">
                                 <div class="pokemon-name">${p.nombre}</div>
                                 <div class="pokemon-types">
                                     <span class="type-badge type-${p.tipo1}">${
@@ -349,8 +426,8 @@
                                   2
                                 )}</div>
                             </div>
-                        `
-                          )
+                              `;
+                          })
                           .join("")}
                     </div>
                 </div>
