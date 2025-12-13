@@ -1,0 +1,312 @@
+{
+  "rival_team": [
+    {
+      "name": "rowlet",
+      "types": [
+        "grass",
+        "flying"
+      ],
+      "totalstats": 550,
+      "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/rowlet.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/rowlet.png'}"
+    },
+    {
+      "name": "kingambit",
+      "types": [
+        "dark",
+        "steel"
+      ],
+      "totalstats": 550,
+      "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/kingambit.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/kingambit.png'}"
+    },
+    {
+      "name": "gholdengo",
+      "types": [
+        "steel",
+        "ghost"
+      ],
+      "totalstats": 550,
+      "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/gholdengo.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/gholdengo.png'}"
+    },
+    {
+      "name": "raging-bolt",
+      "types": [
+        "electric",
+        "dragon"
+      ],
+      "totalstats": 590,
+      "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/raging-bolt.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/raging-bolt.png'}"
+    }
+  ],
+  "teams": [
+    {
+      "pokemon": [
+        {
+          "nombre": "entei",
+          "tipo1": "fire",
+          "tipo2": "",
+          "totalstats": 580,
+          "score": 7.719999999999999,
+          "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/entei.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/entei.png'}"
+        },
+        {
+          "nombre": "arcanine",
+          "tipo1": "fire",
+          "tipo2": "",
+          "totalstats": 555,
+          "score": 7.619999999999999,
+          "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/arcanine.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/arcanine.png'}"
+        },
+        {
+          "nombre": "magmortar",
+          "tipo1": "fire",
+          "tipo2": "",
+          "totalstats": 540,
+          "score": 7.56,
+          "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/magmortar.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/magmortar.png'}"
+        },
+        {
+          "nombre": "typhlosion",
+          "tipo1": "fire",
+          "tipo2": "",
+          "totalstats": 534,
+          "score": 7.536,
+          "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/typhlosion.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/typhlosion.png'}"
+        },
+        {
+          "nombre": "cinderace",
+          "tipo1": "fire",
+          "tipo2": "",
+          "totalstats": 530,
+          "score": 7.52,
+          "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/cinderace.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/cinderace.png'}"
+        },
+        {
+          "nombre": "flareon",
+          "tipo1": "fire",
+          "tipo2": "",
+          "totalstats": 525,
+          "score": 7.5,
+          "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/flareon.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/flareon.png'}"
+        }
+      ],
+      "avg_stats": 544.0,
+      "avg_score": 7.5760000000000005
+    },
+    {
+      "pokemon": [
+        {
+          "nombre": "magmortar",
+          "tipo1": "fire",
+          "tipo2": "",
+          "totalstats": 540,
+          "score": 7.56,
+          "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/magmortar.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/magmortar.png'}"
+        },
+        {
+          "nombre": "typhlosion",
+          "tipo1": "fire",
+          "tipo2": "",
+          "totalstats": 534,
+          "score": 7.536,
+          "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/typhlosion.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/typhlosion.png'}"
+        },
+        {
+          "nombre": "cinderace",
+          "tipo1": "fire",
+          "tipo2": "",
+          "totalstats": 530,
+          "score": 7.52,
+          "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/cinderace.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/cinderace.png'}"
+        },
+        {
+          "nombre": "flareon",
+          "tipo1": "fire",
+          "tipo2": "",
+          "totalstats": 525,
+          "score": 7.5,
+          "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/flareon.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/flareon.png'}"
+        },
+        {
+          "nombre": "rotom-heat",
+          "tipo1": "electric",
+          "tipo2": "fire",
+          "totalstats": 520,
+          "score": 7.4799999999999995,
+          "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/rotom-heat.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/rotom-heat.png'}"
+        },
+        {
+          "nombre": "ninetales",
+          "tipo1": "fire",
+          "tipo2": "",
+          "totalstats": 505,
+          "score": 7.42,
+          "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/ninetales.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/ninetales.png'}"
+        }
+      ],
+      "avg_stats": 525.6666666666666,
+      "avg_score": 7.502666666666666
+    },
+    {
+      "pokemon": [
+        {
+          "nombre": "cinderace",
+          "tipo1": "fire",
+          "tipo2": "",
+          "totalstats": 530,
+          "score": 7.52,
+          "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/cinderace.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/cinderace.png'}"
+        },
+        {
+          "nombre": "flareon",
+          "tipo1": "fire",
+          "tipo2": "",
+          "totalstats": 525,
+          "score": 7.5,
+          "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/flareon.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/flareon.png'}"
+        },
+        {
+          "nombre": "rotom-heat",
+          "tipo1": "electric",
+          "tipo2": "fire",
+          "totalstats": 520,
+          "score": 7.4799999999999995,
+          "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/rotom-heat.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/rotom-heat.png'}"
+        },
+        {
+          "nombre": "ninetales",
+          "tipo1": "fire",
+          "tipo2": "",
+          "totalstats": 505,
+          "score": 7.42,
+          "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/ninetales.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/ninetales.png'}"
+        },
+        {
+          "nombre": "magmar",
+          "tipo1": "fire",
+          "tipo2": "",
+          "totalstats": 495,
+          "score": 7.38,
+          "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/magmar.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/magmar.png'}"
+        },
+        {
+          "nombre": "torkoal",
+          "tipo1": "fire",
+          "tipo2": "",
+          "totalstats": 470,
+          "score": 7.279999999999999,
+          "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/torkoal.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/torkoal.png'}"
+        }
+      ],
+      "avg_stats": 507.5,
+      "avg_score": 7.430000000000001
+    },
+    {
+      "pokemon": [
+        {
+          "nombre": "rotom-heat",
+          "tipo1": "electric",
+          "tipo2": "fire",
+          "totalstats": 520,
+          "score": 7.4799999999999995,
+          "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/rotom-heat.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/rotom-heat.png'}"
+        },
+        {
+          "nombre": "ninetales",
+          "tipo1": "fire",
+          "tipo2": "",
+          "totalstats": 505,
+          "score": 7.42,
+          "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/ninetales.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/ninetales.png'}"
+        },
+        {
+          "nombre": "magmar",
+          "tipo1": "fire",
+          "tipo2": "",
+          "totalstats": 495,
+          "score": 7.38,
+          "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/magmar.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/magmar.png'}"
+        },
+        {
+          "nombre": "torkoal",
+          "tipo1": "fire",
+          "tipo2": "",
+          "totalstats": 470,
+          "score": 7.279999999999999,
+          "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/torkoal.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/torkoal.png'}"
+        },
+        {
+          "nombre": "hippowdon",
+          "tipo1": "ground",
+          "tipo2": "",
+          "totalstats": 525,
+          "score": 6.9,
+          "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/hippowdon.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/hippowdon.png'}"
+        },
+        {
+          "nombre": "sandaconda",
+          "tipo1": "ground",
+          "tipo2": "",
+          "totalstats": 510,
+          "score": 6.84,
+          "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/sandaconda.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/sandaconda.png'}"
+        }
+      ],
+      "avg_stats": 504.1666666666667,
+      "avg_score": 7.216666666666666
+    },
+    {
+      "pokemon": [
+        {
+          "nombre": "magmar",
+          "tipo1": "fire",
+          "tipo2": "",
+          "totalstats": 495,
+          "score": 7.38,
+          "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/magmar.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/magmar.png'}"
+        },
+        {
+          "nombre": "torkoal",
+          "tipo1": "fire",
+          "tipo2": "",
+          "totalstats": 470,
+          "score": 7.279999999999999,
+          "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/torkoal.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/torkoal.png'}"
+        },
+        {
+          "nombre": "hippowdon",
+          "tipo1": "ground",
+          "tipo2": "",
+          "totalstats": 525,
+          "score": 6.9,
+          "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/hippowdon.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/hippowdon.png'}"
+        },
+        {
+          "nombre": "sandaconda",
+          "tipo1": "ground",
+          "tipo2": "",
+          "totalstats": 510,
+          "score": 6.84,
+          "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/sandaconda.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/sandaconda.png'}"
+        },
+        {
+          "nombre": "donphan",
+          "tipo1": "ground",
+          "tipo2": "",
+          "totalstats": 500,
+          "score": 6.8,
+          "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/donphan.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/donphan.png'}"
+        },
+        {
+          "nombre": "mudsdale",
+          "tipo1": "ground",
+          "tipo2": "",
+          "totalstats": 500,
+          "score": 6.8,
+          "sprite_url": "{'primary': 'https://img.pokemondb.net/sprites/scarlet-violet/normal/mudsdale.png', 'fallback': 'https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/mudsdale.png'}"
+        }
+      ],
+      "avg_stats": 500.0,
+      "avg_score": 7.0
+    }
+  ]
+}

@@ -373,7 +373,6 @@
                 </div>
             `;
       }
-
       function displayTeams(teams) {
         const section = document.getElementById("teamsSection");
         section.style.display = "block";
@@ -387,11 +386,11 @@
                         }</div>
                         <div class="team-stats">
                             <span class="stat-badge">Stats Promedio: ${Math.round(
-                              team.avg_stats
+                              team.avg_stats || 0
                             )}</span>
-                            <span class="stat-badge">Score: ${team.avg_score.toFixed(
-                              2
-                            )}</span>
+                            <span class="stat-badge">Score: ${(
+                              team.avg_score || 0
+                            ).toFixed(2)}</span>
                         </div>
                     </div>
                     <div class="pokemon-grid">
@@ -403,30 +402,30 @@
                             const imgId = `team-${idx}-img-${pIdx}`;
 
                             return `
-                            <div class="pokemon-card">
-                                <img id="${imgId}" src="${primaryUrl}" 
-                                     class="pokemon-sprite" 
-                                     onerror="handleImageError(document.getElementById('${imgId}'), '${fallbackUrl}', '${fallback2Url}')" 
-                                     alt="${p.nombre}">
-                                <div class="pokemon-name">${p.nombre}</div>
-                                <div class="pokemon-types">
-                                    <span class="type-badge type-${p.tipo1}">${
-                              p.tipo1
-                            }</span>
-                                    ${
-                                      p.tipo2
-                                        ? `<span class="type-badge type-${p.tipo2}">${p.tipo2}</span>`
-                                        : ""
-                                    }
+                                <div class="pokemon-card">
+                                    <img id="${imgId}" src="${primaryUrl}" 
+                                         class="pokemon-sprite" 
+                                         onerror="handleImageError(document.getElementById('${imgId}'), '${fallbackUrl}', '${fallback2Url}')" 
+                                         alt="${p.nombre}">
+                                    <div class="pokemon-name">${p.nombre}</div>
+                                    <div class="pokemon-types">
+                                        <span class="type-badge type-${
+                                          p.tipo1
+                                        }">${p.tipo1}</span>
+                                        ${
+                                          p.tipo2
+                                            ? `<span class="type-badge type-${p.tipo2}">${p.tipo2}</span>`
+                                            : ""
+                                        }
+                                    </div>
+                                    <div class="pokemon-total">Stats: ${
+                                      p.totalstats || 0
+                                    }</div>
+                                    <div class="pokemon-score">Score: ${(
+                                      p.score || 0
+                                    ).toFixed(2)}</div>
                                 </div>
-                                <div class="pokemon-total">Stats: ${
-                                  p.totalstats
-                                }</div>
-                                <div class="pokemon-score">Score: ${p.score.toFixed(
-                                  2
-                                )}</div>
-                            </div>
-                              `;
+                                `;
                           })
                           .join("")}
                     </div>
